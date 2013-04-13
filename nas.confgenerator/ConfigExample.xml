@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<filer class="info">
+<!--
+put the controler hostname
+-->
+<hostname>
+YouFilerHostname
+</hostname>
+<!--
+put the partner IP address (HA configuration)
+-->
+
+<partnerAddress>
+10.10.10.10 
+</partnerAddress>
+<!--
+description of igroup bloc
+        <ifgroup name="vm1">  <=== name of your interface
+                <port>e3a e4b</port> <=== ports bind to interface
+                <type>lacp</type> <=== lag type
+                <vlans> <===  vlan list
+                3210 3111 3112
+                </vlans>
+        </ifgroup>
+-->
+<ifgroups>
+	<ifgroup name="vm1">
+		<port>e3a e4b</port>
+		<type>lacp</type>
+		<vlans>
+		3110 3111 3112
+		</vlans>
+	</ifgroup>
+	<ifgroup name="vm2">
+		<port>e5a e4b</port>
+		<type>lacp</type>
+		<vlans>
+		3200 3201 3102 
+		</vlans>
+	</ifgroup>
+	<ifgroup name="vm3">
+		<port>e0a e0b</port>
+		<type>lacp</type>
+		<vlans>
+		1106
+		</vlans>
+	</ifgroup>
+</ifgroups>
+<!--
+description of general interfaces block use for vfiler0 interfaces
+        <interface hostnamename="`hostname`-e0M"> <===  hostname you want to put or IP address of interfaces
+                <int>e0M</int> <=== interface name (vm1 vm2  EOM etc etc)
+                <netmask>255.255.255.0</netmask> <=== netmask
+                <mtu>1500</mtu> <=== MTU
+        </interface>
+
+
+-->
+<interfaces>
+	<interface hostnamename="`hostname`-e0M">
+	        <int>e0M</int>
+	        <netmask>255.255.255.0</netmask>
+	        <mtu>1500</mtu>
+	</interface>
+
+	<interface hostnamename="`hostname`-3001">
+	        <int>vm1</int>
+	        <vlan>3001</vlan>
+	        <netmask>255.255.255.0</netmask>
+	        <mtu>9000</mtu>
+	</interface>
+
+</interfaces>
+
+<!--
+description of global routes bloc
+use to define global route
+<routes>
+        <route type="default" metric="10"> type ==> default/host/net metric of this route
+        10.10.10.0/19 10.10.10.253 <=== the route itself :p
+        </route>
+        <route type="host" metric="10">
+        10.20.20.22 10.10.20.253
+</routes>
+
+
+-->
+<global>
+<routes>
+        <route type="default" metric="10">
+        10.10.10.0/19 10.10.10.253
+        </route>
+        <route type="host" metric="10">
+        10.20.20.22 10.10.20.253
+        </route>
+        <route type="net" metric="10">
+        10.30.30.0/24 10.30.30.253
+        </route>
+</routes>
+</global>
+
+<!--
+description of ipspace name
+        <ipspace  name="ipspace_dmz1"> <=== ipspace 1
+                <interfaces> <=== interfaces member of this ipspaces
+                vm1-e3b4a-3111 vm2-e5a4b-3101
+                </interfaces>
+        </ipspace>
+-->
+
+<ipspaces>
+	<ipspace  name="ipspace_dmz2">
+		<interfaces>
+		vm1-e3b4a-3111 vm2-e5a4b-3310
+		</interfaces>
+	</ipspace>
+	<ipspace  name="ipspace_dmz2">
+		<interfaces>
+		vm1-e3b4a-3201 vm2-e5a4b-3202
+		</interfaces>
+	</ipspace>
+</ipspaces>
+<!--
+description of vfiler bloc
+        <vfiler name="myvfiler-001" ipspace="ipspace_dmz1">  <=== name of the vfiler and affected ipspaces
+                <interfaces>  interfaces bloc setting interfaces and route
+			add one interface by
+                <interface hostname="myvfiler-001-dmz1"> <=== interface hostname
+                        <int>vm1</int> <=== just put the correct name port will be detect automatically
+                        <vlan>3111</vlan> <=== vlan bind to this interfaces
+                        <ip>10.197.128.2</ip> <=== ip address
+                        <netmask>255.255.255.0</netmask> <=== netmask
+                        <mtu>9000</mtu> <=== mtu
+			<routes>
+				<route type="default" metric="10"> type ==> default/host/net + metric of this route
+				        10.10.10.0/19 10.10.10.253 <=== the route itself :p
+			        </route>
+			</routes>
+		</interface>
+        </vfiler>
+
+-->
+
+<vfilers>
+        <vfiler name="monvfiler-ech" ipspace="ipspace_ivx_pri">
+		<interfaces>
+		<interface hostname="dvivxnaspriv001-ech">
+		        <int>vm1</int>
+		        <vlan>3111</vlan>
+                        <ip>10.197.128.2</ip>
+		        <netmask>255.255.255.0</netmask>
+		        <mtu>9000</mtu>
+                        <routes>
+				<route type="default" metric="1">
+				10.197.128.0/19 10.197.128.254
+				</route>
+                        </routes>
+		</interface>
+		<interface hostname="dvivxnaspriv001-ech2">
+		        <int>vm2</int>
+		        <vlan>3101</vlan>
+                        <ip>10.197.160.2</ip>
+		        <netmask>255.255.255.0</netmask>
+	        	<mtu>9000</mtu>
+                        <routes>
+				<route type="default" metric="1">
+				10.197.160.0/19 10.197.160.254
+				</route>
+                        </routes>	
+		</interfaces>
+	</vfiler>
+</vfilers>
+</filer>
