@@ -2,7 +2,7 @@
 #-*-coding: utf8 -*
 
 
-"""Python configmaker_nas.py 
+"""Python configmaker_nas.py
 Script generate custom netapp filer .config and .rc based on XML config file
 """
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
@@ -15,10 +15,7 @@ __date__ = "$Date: $"
 
 import argparse
 from lxml import etree
-import subprocess
-import sys
-import string
-import getpass, os
+import os
 
 # this part contain all netapp command use python 2.x % vars to fill command
 # command format :
@@ -34,15 +31,18 @@ vFilerCreateCSS = "vfiler create %(vFilerFullName)s -n -s %(ipspaceName)s %(vFil
 vFilerDisallowProtoCSS = "vfiler disallow %(vFilerFullName)s proto=ssh proto=rsh proto=iscsi proto=ftp \n"
 vFilerRouteAddCSS = "vfiler run %(vFilerFullName)s route add %(vFilerRouteType)s %(vFilerInterfaceRoute)s  %(vFilerRouteMetric)s\n"
 
+
 # function to return filer hostname from xml config
 def HostNameConfig():
     HostnameFiler = rootTreeFiler.xpath('//hostname/text()')[0].strip()
     return HostnameFiler
 
+
 # we setup basic configuration here 
 def BasicConfig():
     ConfigFileHostname = "hostname " + HostnameFiler +"\n"
     return ConfigFileHostname
+
 
 # general options we set up in our configuration
 def optionsGeneral():
