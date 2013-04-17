@@ -23,7 +23,7 @@ import os
 #
 ifGroupConfigCSS = "ifgrp create %(lagType)s %(ifgroupename)s -b port %(port)s \n"
 vlanConfigCSS = "vlan create %(ifgroupename)s %(vlanlist)s \n"
-ipspacesConfigCSS =  "ipspace create %(ipspaceName)s %(ipspaceInterfaces)s \n"
+ipspacesConfigCSS = "ipspace create %(ipspaceName)s %(ipspaceInterfaces)s \n"
 interfacesConfigCSS = "ifconfig %(interfaceName)s %(interfaceHostname)s netmask %(interfaceNetmask)s mtusize %(interfaceMtu)s partner %(interfaceName)s \n"
 globalRouteCSS = "route add %(routeType)s %(routeToAdd)s %(routeMetric)s \n"
 vFilerVolCreateCSS = "vol create %(vFilerShortName)s_vol_root -s volume RP_NL2_01_etc 300M \n"
@@ -38,9 +38,9 @@ def HostNameConfig():
     return HostnameFiler
 
 
-# we setup basic configuration here 
+# we setup basic configuration here
 def BasicConfig():
-    ConfigFileHostname = "hostname " + HostnameFiler +"\n"
+    ConfigFileHostname"hostname " + HostnameFiler + "\n"
     return ConfigFileHostname
 
 
@@ -48,11 +48,11 @@ def BasicConfig():
 def optionsGeneral():
     partnerAddress = rootTreeFiler.xpath('//partnerAddress/text()')[0].strip()
     optionsGeneralTxt = ""
-    optionsGeneralTxt +="options licensed_feature.multistore.enable on \n"
-    optionsGeneralTxt +="options cf.giveback.auto.cancel.on_network_failure on \n"
-    optionsGeneralTxt +="options cf.takeover.on_reboot on \n"
-    optionsGeneralTxt +="options cf.hw_assist.partner.address " + partnerAddress + "\n"
-    optionsGeneralTxt +="options cf.hw_assist.enable on  \n"
+    optionsGeneralTxt += "options licensed_feature.multistore.enable on \n"
+    optionsGeneralTxt += "options cf.giveback.auto.cancel.on_network_failure on \n"
+    optionsGeneralTxt += "options cf.takeover.on_reboot on \n"
+    optionsGeneralTxt += "options cf.hw_assist.partner.address " + partnerAddress + "\n"
+    optionsGeneralTxt += "options cf.hw_assist.enable on  \n"
     return optionsGeneralTxt
 
 
@@ -63,11 +63,12 @@ def ifGroupConfig():
     # then make config command using the ifGroupConfigCSS
     for ifgroups in rootTreeFiler.xpath('//ifgroups'):
         for ifgroup in ifgroups:
-            ifgroupename =  ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '')
+            ifgroupename = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '')
             port = ifgroup.find('port').text
             lagType = ifgroup.find('type').text
             ifGroupConfigTxt += ifGroupConfigCSS % vars()
     return ifGroupConfigTxt
+
 
 # generate vlan config
 def vlanConfig():
@@ -75,10 +76,11 @@ def vlanConfig():
     # cylcle on xml part with the ifgroupname short name (vm1 for exemple) we could find the correct port
     for ifgroups in rootTreeFiler.xpath('//ifgroups'):
         for ifgroup in ifgroups:
-            ifgroupename =  ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '')
+            ifgroupename = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '')
             vlanlist = ifgroup.find('vlans').text.strip()
             vlanConfigTxt += vlanConfigCSS % vars()
     return vlanConfigTxt
+
 
 # generate ipspace definition
 def ipspacesConfig():
@@ -89,6 +91,7 @@ def ipspacesConfig():
             ipspaceInterfaces = ipspace.find('interfaces').text.strip()
             ipspacesConfigTxt += ipspacesConfigCSS % vars()
     return ipspacesConfigTxt
+
 
 # generate interface configuration use for vfiler0 configuration
 def interfacesConfig():
@@ -101,9 +104,10 @@ def interfacesConfig():
             interfaceMtu = interface.find('mtu').text.strip()
             xpathsearchtext = '//ifgroups//ifgroup[@name="' + interfaceName + '"]'
             for ifgroup in rootTreeFiler.xpath(xpathsearchtext):
-                interfaceName = ifgroup.get('name')  + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
+                interfaceName = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
             interfacesConfigTxt += interfacesConfigCSS % vars()
     return interfacesConfigTxt
+
 
 # generate vfiler configuration
 # configure also vfiler interfaces all in once route also
@@ -118,7 +122,7 @@ def vFilersConfig():
             vFilerFullName = vFiler.get('name')
             vFilerShortName = vFilerFullName.rsplit('-', 1)[0]
             ipspaceName = vFiler.get('ipspace')
-            
+
             xpathsearchtext = '//vfilers//vfiler[@name="' + vFilerFullName + '"]/interfaces'
             for interfaces in rootTreeFiler.xpath(xpathsearchtext):
                 for interface in interfaces:
@@ -126,28 +130,29 @@ def vFilersConfig():
                     interfaceName = interface.find('int').text.strip()
                     xpathsearchtext = '//ifgroups//ifgroup[@name="' + interfaceName + '"]'
                     for ifgroup in rootTreeFiler.xpath(xpathsearchtext):
-                        interfaceName = ifgroup.get('name')  + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
+                        interfaceName = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
                     interfaceVlan = interface.find('vlan').text.strip()
                     interfaceIp = interface.find('ip').text.strip()
                     interfaceNetmask = interface.find('netmask').text.strip()
                     interfaceMtu = interface.find('mtu').text.strip()
-                    
+
                     vFilerIpList += "-i " + interfaceIp + " "
                     vFilerInterfacesConfig += interfacesConfigCSS % vars()
 
-                    for routes in  interface:
+                    for routes in interface:
                         for route in routes:
                             vFilerInterfaceRoute = route.text.strip()
                             vFilerRouteType = route.get('type')
-                            vFilerRouteMetric =  route.get('metric')
+                            vFilerRouteMetric = route.get('metric')
                             vFilerRoutesConfig += vFilerRouteAddCSS % vars()
 
                 vFilersConfigTxt += vFilerVolCreateCSS % vars()
                 vFilersConfigTxt += vFilerCreateCSS % vars()
                 vFilersConfigTxt += vFilerDisallowProtoCSS % vars()
                 vFilersConfigTxt += vFilerRoutesConfig
-                vFilersConfigTxt +=  vFilerInterfacesConfig
+                vFilersConfigTxt += vFilerInterfacesConfig
     return vFilersConfigTxt
+
 
 # generate vfiler interface + route for .rc
 def vFilersInterfacesAndRoutes():
@@ -168,7 +173,7 @@ def vFilersInterfacesAndRoutes():
                     interfaceName = interface.find('int').text.strip()
                     xpathsearchtext = '//ifgroups//ifgroup[@name="' + interfaceName + '"]'
                     for ifgroup in rootTreeFiler.xpath(xpathsearchtext):
-                        interfaceName = ifgroup.get('name')  + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
+                        interfaceName = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
                     interfaceVlan = interface.find('vlan').text.strip()
                     interfaceIp = interface.find('ip').text.strip()
                     interfaceNetmask = interface.find('netmask').text.strip()
@@ -177,14 +182,14 @@ def vFilersInterfacesAndRoutes():
                     vFilerIpList += "-i " + interfaceIp + " "
                     vFilerInterfacesConfig += interfacesConfigCSS % vars()
 
-                    for routes in  interface:
+                    for routes in interface:
                         for route in routes:
                             vFilerInterfaceRoute = route.text.strip()
                             vFilerRouteType = route.get('type')
-                            vFilerRouteMetric =  route.get('metric')
+                            vFilerRouteMetric = route.get('metric')
                             vFilerRoutesConfig += vFilerRouteAddCSS % vars()
 
-                vFilersConfigTxt +=  vFilerInterfacesConfig
+                vFilersConfigTxt += vFilerInterfacesConfig
                 vFilersConfigTxt += vFilerRoutesConfig
     return vFilersConfigTxt
 
@@ -195,7 +200,7 @@ def globalRoutes():
     for filerRoutes in rootTreeFiler.xpath('//global/routes'):
         for route in filerRoutes:
             routeType = route.get('type')
-            routeMetric =  route.get('metric')
+            routeMetric = route.get('metric')
             routeToAdd = route.text.strip()
             routeConfigTxt += globalRouteCSS % vars()
     return routeConfigTxt
@@ -211,21 +216,16 @@ if __name__ == '__main__':
     parser.add_argument("-c", "--configfile", action="store", dest="configFile", help="XML config file", metavar='configfile', nargs=1, required=True)
     parser.add_argument("-v", "--vfiler", action="store_true", help="vfiler config generator only", default=False)
 
-
     args = parser.parse_args()
-
-
 
     if args.configFile:
 
         try:
             myXmlConfigFile = open(args.configFile[0], "r")
         except Exception, e:
-            print "Error openning file: "+args.configFile[0]
+            print "Error openning file: " + args.configFile[0]
             print str(e)
             os._exit(1)
-
-    
 
     # we setup xml parsing env
     treeFiler = etree.parse(myXmlConfigFile)
@@ -234,7 +234,6 @@ if __name__ == '__main__':
     # retrive hostname from xml config
     HostnameFiler = HostNameConfig()
 
-    
     # rc and config file will be name <hostname>.rc and .config
     # for vfiler config hostname.vfiler
     configFile = HostnameFiler + '.config'
@@ -246,26 +245,26 @@ if __name__ == '__main__':
         try:
             myConfigFileVFiler = open(configVFiler, "w")
         except Exception, e:
-            print "Error openning file: "+configFile
+            print "Error openning file: " + configFile
             print str(e)
             os._exit(1)
-        
+
         # we write to vfiler config file only vfiler part
         myConfigFileVFiler.write(vFilersConfig())
         myConfigFileVFiler.close
     else:
-        # we do full configuration so try open both file 
+        # we do full configuration so try open both file
         try:
             myConfigFile = open(configFile, "w")
         except Exception, e:
-            print "Error openning file: "+configFile
+            print "Error openning file: " + configFile
             print str(e)
             os._exit(1)
 
         try:
             myRcFile = open(rcFile, "w")
         except Exception, e:
-            print "Error openning file: "+rcFile
+            print "Error openning file: " + rcFile
             print str(e)
             os._exit(1)
 
@@ -296,7 +295,6 @@ if __name__ == '__main__':
         # close file we done all
         myConfigFile.close
         myRcFile.close
-    
+
 
     #end of main
-
