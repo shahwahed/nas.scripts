@@ -2,7 +2,7 @@
 #-*-coding: utf8 -*
 
 
-"""Python configmaker_nas.py
+"""Python netapp.config.maker.py
 Script generate custom netapp filer .config and .rc based on XML config file
 """
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
@@ -13,7 +13,8 @@ __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
 
-""" Copyright (C) 2012, 2013  Shah Mohsin WAHED
+"""
+    Copyright (C) 2012, 2013  Shah Mohsin WAHED
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,7 +57,7 @@ def HostNameConfig():
 
 # we setup basic configuration here
 def BasicConfig():
-    ConfigFileHostname"hostname " + HostnameFiler + "\n"
+    ConfigFileHostname = "hostname " + HostnameFiler + "\n"
     return ConfigFileHostname
 
 
