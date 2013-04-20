@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='netappConfigMaker',
-    version='1.0.0',
+    version='1.1.0',
     author='Shah Mohsin WAHED',
     author_email='shahmohsin.wahed@gmail.com',
     packages=['netappConfigMaker', 'netappConfigMaker.test'],
