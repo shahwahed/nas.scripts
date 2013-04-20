@@ -1,0 +1,4 @@
+Changelog for netappConfigMaker
+===============================
+
+V1.0.0, 20130402 -- Initial release,
