@@ -306,8 +306,8 @@ if __name__ == '__main__':
         myRcFile.write(ifGroupConfig())
         myRcFile.write(vlanConfig())
         myRcFile.write(interfacesConfig())
-        myRcFile.write(vFilersInterfacesAndRoutes())
         myRcFile.write(globalRoutes())
+        myRcFile.write(vFilersInterfacesAndRoutes())
 
         # close file we done all
         myConfigFile.close
