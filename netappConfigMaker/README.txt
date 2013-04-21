@@ -9,7 +9,7 @@ License: GPLv3
 
 License URL: http://www.gnu.org/licenses/gpl-3.0.html
 
-Licence
+License
 =======
 
     Copyright (C) 2012, 2013  Shah Mohsin WAHED
