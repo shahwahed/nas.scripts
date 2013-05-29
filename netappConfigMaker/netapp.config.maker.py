@@ -289,6 +289,8 @@ if __name__ == '__main__':
         # simple part we just write each config command to the correct filer
         # myConfigFile for .config
         # myRcFile for .rc
+
+        """
         myConfigFile.write("echo ifgrp and vlan creation \n")
         myConfigFile.write(ifGroupConfig())
         myConfigFile.write(vlanConfig())
@@ -304,24 +306,24 @@ if __name__ == '__main__':
         myConfigFile.write(vFilersConfig())
 
         """
-        myRcFile.write(BasicConfig())
-        myRcFile.write(ifGroupConfig())
-        myRcFile.write(vlanConfig())
-        myRcFile.write(interfacesConfig())
-        myRcFile.write(globalRoutes())
-        myRcFile.write(vFilersInterfacesAndRoutes())
-        """
 
-        rcTemplate = {
+
+        dictTemplate = {
             'BasicConfig': BasicConfig(),
             'ifGroupConfig': ifGroupConfig(),
             'vlanConfig': vlanConfig(),
             'interfacesConfig': interfacesConfig(),
             'globalRoutes': globalRoutes(),
             'vFilersInterfacesAndRoutes': vFilersInterfacesAndRoutes(),
+            'optionsGeneral': optionsGeneral(),
+            'ipspacesConfig': ipspacesConfig(),
+            'vFilersConfig': vFilersConfig(),
         }
 
-        rcPrint = Template(file="RC.tmpl", searchList=[rcTemplate])
+        configPrint = Template(file="Config.tmpl", searchList=[dictTemplate])
+        rcPrint = Template(file="RC.tmpl", searchList=[dictTemplate])
+
+        myConfigFile.write(str(configPrint))
         myRcFile.write(str(rcPrint))
 
         # close file we done all
