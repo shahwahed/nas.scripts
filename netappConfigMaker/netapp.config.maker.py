@@ -33,6 +33,7 @@ __date__ = "$Date: $"
 import argparse
 from lxml import etree
 import os
+from Cheetah.Template import Template
 
 # this part contain all netapp command use python 2.x % vars to fill command
 # command format :
@@ -302,12 +303,26 @@ if __name__ == '__main__':
         myConfigFile.write("echo vfilers configuration\n")
         myConfigFile.write(vFilersConfig())
 
+        """
         myRcFile.write(BasicConfig())
         myRcFile.write(ifGroupConfig())
         myRcFile.write(vlanConfig())
         myRcFile.write(interfacesConfig())
         myRcFile.write(globalRoutes())
         myRcFile.write(vFilersInterfacesAndRoutes())
+        """
+
+        rcTemplate = {
+            'BasicConfig': BasicConfig(),
+            'ifGroupConfig': ifGroupConfig(),
+            'vlanConfig': vlanConfig(),
+            'interfacesConfig': interfacesConfig(),
+            'globalRoutes': globalRoutes(),
+            'vFilersInterfacesAndRoutes': vFilersInterfacesAndRoutes(),
+        }
+
+        rcPrint = Template(file="RC.tmpl", searchList=[rcTemplate])
+        myRcFile.write(str(rcPrint))
 
         # close file we done all
         myConfigFile.close
