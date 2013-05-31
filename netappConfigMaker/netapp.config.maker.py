@@ -8,7 +8,7 @@ Script generate custom netapp filer .config and .rc based on XML config file
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
 __copyright__ = "Copyright (c) 2013 S.WAHED"
 __license__ = "GPL"
-__version__ = "1.5.1"
+__version__ = "1.5.2"
 __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
@@ -49,6 +49,7 @@ vFilerCreateCSS = "vfiler create %(vFilerFullName)s -n -s %(ipspaceName)s %(vFil
 vFilerDisallowProtoCSS = "vfiler disallow %(vFilerFullName)s proto=ssh proto=rsh proto=iscsi proto=ftp \n"
 vFilerRouteAddCSS = "vfiler run %(vFilerFullName)s route add %(vFilerRouteType)s %(vFilerInterfaceRoute)s  %(vFilerRouteMetric)s\n"
 
+tmplPath = "/usr/local/bin/"
 
 # function to return filer hostname from xml config
 def HostNameConfig():
@@ -303,8 +304,8 @@ if __name__ == '__main__':
             'vFilersConfig': vFilersConfig(),
         }
 
-        configPrint = Template(file="netapp.config.maker.Config.tmpl", searchList=[dictTemplate])
-        rcPrint = Template(file="netapp.config.maker.RC.tmpl", searchList=[dictTemplate])
+        configPrint = Template(file = tmplPath + "netapp.config.maker.Config.tmpl", searchList=[dictTemplate])
+        rcPrint = Template(file = tmplPath +"netapp.config.maker.RC.tmpl", searchList=[dictTemplate])
 
         myConfigFile.write(str(configPrint))
         myRcFile.write(str(rcPrint))

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='netappConfigMaker',
-    version='1.5.1',
+    version='1.5.2',
     author='Shah Mohsin WAHED',
     author_email='shahmohsin.wahed@gmail.com',
     #packages=['netappConfigMaker', 'netappConfigMaker.test'],
