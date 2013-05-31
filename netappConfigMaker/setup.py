@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='netappConfigMaker',
-    version='1.1.0',
+    version='1.5.0',
     author='Shah Mohsin WAHED',
     author_email='shahmohsin.wahed@gmail.com',
     #packages=['netappConfigMaker', 'netappConfigMaker.test'],
@@ -14,5 +14,6 @@ setup(
     install_requires=[
         "argparse >= 1.2.1",
         "lxml >= 2.3.5",
+        "cheetah >= 2.4.4",
     ],
 )
