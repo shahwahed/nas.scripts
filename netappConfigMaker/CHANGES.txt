@@ -1,4 +1,10 @@
 Changelog for netappConfigMaker
 ===============================
 
+Changes from version v1.5.0 to V1.1.0, 20130531 
+-----------------------------------------------
+- moving from static .config and .rc layout to cheetah template to allow modification of the layout and comment add in .rc and .config output
+
 V1.1.0, 20130402 -- Initial release,
+
+
