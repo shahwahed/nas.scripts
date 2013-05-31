@@ -1,2 +1,2 @@
-include *.txt
+include *.txt *.tmpl
 recursive-include docs *.txt .xml
