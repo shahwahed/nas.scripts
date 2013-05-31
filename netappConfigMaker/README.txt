@@ -36,6 +36,7 @@ This script will create configuration file (".config" and ".rc") for Netapp NAS 
 Making it simpler to create standard and quick configs.
 
 Project link : http://shah.nas.scripting.cloudcorner.net
+Donate link `PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=shahmohsin%2ewahed%40gmail%2ecom&lc=FR&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted>`_
 
 
 Requirements / Pre-requisites
@@ -87,6 +88,8 @@ Ipspaces Configuration
 Interfaces Configuration
 Global Routes
 vFilers Configuration
+
+the layout is defined in Config.tmpl file you can rearrange it to modify the layout
         
 .rc layout
 ----------
@@ -100,11 +103,12 @@ Interfaces Configuration
 Global Routes
 vFilers Configuration
 
+the layout is defined in RC.tmpl file you can rearrange it to modify the layout
 
 Authors and Contributors
 ========================
 
-Author: `Shah Mohsin WAHED <mailto:shahmohsin.wahed@gmail.com>`_ | `Linkedin Profile <http://www.linkedin.com/pub/shah-mohsin-wahed/1a/750/18a>`_
+Author: `Shah Mohsin WAHED <mailto:shahmohsin.wahed@gmail.com>`_ | `Linkedin Profile <http://www.linkedin.com/pub/shah-mohsin-wahed/1a/750/18a>`_ | `Twitter <https://twitter.com/sm_wahed>`_
 
 Thanks to David Rousseau and Timo Sugliani for encouraging me to publish my work on github and pypi :)
 
@@ -112,3 +116,8 @@ Support
 =======
 
 Having trouble with this scripts, think about an evolution ? Contact me!
+
+Donation:
+=========
+
+Like the script? you can support my work with a donation using `PayPal <https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=shahmohsin%2ewahed%40gmail%2ecom&lc=FR&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted>`_

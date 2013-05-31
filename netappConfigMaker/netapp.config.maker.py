@@ -291,9 +291,6 @@ if __name__ == '__main__':
         # in this version cheetah is just use to order and add comment to the rc and .config file
         # myConfigFile for .config
         # myRcFile for .rc
-
-
-
         dictTemplate = {
             'BasicConfig': BasicConfig(),
             'ifGroupConfig': ifGroupConfig(),
