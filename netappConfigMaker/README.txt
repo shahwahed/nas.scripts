@@ -27,6 +27,17 @@ License
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	
+PyPI status:
+============
+
+.. image:: https://pypip.in/v/netappConfigMaker/badge.png
+    :target: https://crate.io/packages/netappConfigMaker/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/netappConfigMaker/badge.png
+    :target: https://crate.io/packages/netappConfigMaker/
+    :alt: Number of PyPI downloads
+
 
 Description
 ===========
