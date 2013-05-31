@@ -3,7 +3,7 @@ Netapp 7M configuration generator
 
 Tags: Netapp, Configuration, XML
 
-Version history: 1.5.0
+Version history: 1.5.1
 
 License: GPLv3
 
@@ -100,7 +100,7 @@ Interfaces Configuration
 Global Routes
 vFilers Configuration
 
-the layout is defined in Config.tmpl file you can rearrange it to modify the layout
+the layout is defined in netapp.config.maker.Config.tmpl file you can rearrange it to modify the layout
         
 .rc layout
 ----------
@@ -114,7 +114,7 @@ Interfaces Configuration
 Global Routes
 vFilers Configuration
 
-the layout is defined in RC.tmpl file you can rearrange it to modify the layout
+the layout is defined in netapp.config.maker.RC.tmpl file you can rearrange it to modify the layout
 
 Authors and Contributors
 ========================

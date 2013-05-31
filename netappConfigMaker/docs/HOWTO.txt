@@ -3,7 +3,7 @@ Netapp 7M configuration generator
 
 Tags: Netapp, Configuration, XML
 
-Version history: 1.5.0
+Version history: 1.5.1
 
 License: GPLv3
 
@@ -89,7 +89,7 @@ Interfaces Configuration
 Global Routes
 vFilers Configuration
 
-the layout of the .config is defined into a cheetah template file Config.tmpl
+the layout of the .config is defined into a cheetah template file netapp.config.maker.Config.tmpl
 in this template you can add comment or custom fixed setting (autosupport for exmemple), the part adding by the script are $<scriptFunctionName> and have to be add to the dict if not already in it.
 
 .rc layout
@@ -104,7 +104,7 @@ Interfaces Configuration
 Global Routes
 vFilers Configuration
 
-the layout of the .rc is defined into a cheetah template file RC.tmpl
+the layout of the .rc is defined into a cheetah template file netapp.config.maker.RC.tmpl
 in this template you can add comment or custom fixed setting you want to have at boot time, the part adding by the script are $<scriptFunctionName> and have to be add to the dict if not already in it.
 
 Authors and Contributors

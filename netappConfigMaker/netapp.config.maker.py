@@ -8,7 +8,7 @@ Script generate custom netapp filer .config and .rc based on XML config file
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
 __copyright__ = "Copyright (c) 2013 S.WAHED"
 __license__ = "GPL"
-__version__ = "1.5.0"
+__version__ = "1.5.1"
 __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
@@ -303,8 +303,8 @@ if __name__ == '__main__':
             'vFilersConfig': vFilersConfig(),
         }
 
-        configPrint = Template(file="Config.tmpl", searchList=[dictTemplate])
-        rcPrint = Template(file="RC.tmpl", searchList=[dictTemplate])
+        configPrint = Template(file="netapp.config.maker.Config.tmpl", searchList=[dictTemplate])
+        rcPrint = Template(file="netapp.config.maker.RC.tmpl", searchList=[dictTemplate])
 
         myConfigFile.write(str(configPrint))
         myRcFile.write(str(rcPrint))
