@@ -8,7 +8,7 @@ Script generate custom netapp filer .config and .rc based on XML config file
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
 __copyright__ = "Copyright (c) 2013 S.WAHED"
 __license__ = "GPL"
-__version__ = "1.1.0"
+__version__ = "1.5.0"
 __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
@@ -286,26 +286,12 @@ if __name__ == '__main__':
             print str(e)
             os._exit(1)
 
-        # simple part we just write each config command to the correct filer
+        # simple part we just create a dict with all our variable
+        # then put them in form with cheetah template
+        # in this version cheetah is just use to order and add comment to the rc and .config file
         # myConfigFile for .config
         # myRcFile for .rc
 
-        """
-        myConfigFile.write("echo ifgrp and vlan creation \n")
-        myConfigFile.write(ifGroupConfig())
-        myConfigFile.write(vlanConfig())
-        myConfigFile.write("echo General options\n")
-        myConfigFile.write(optionsGeneral())
-        myConfigFile.write("echo ipspaces creation\n")
-        myConfigFile.write(ipspacesConfig())
-        myConfigFile.write("echo vfiler0 interface address\n")
-        myConfigFile.write(interfacesConfig())
-        myConfigFile.write("echo global route\n")
-        myConfigFile.write(globalRoutes())
-        myConfigFile.write("echo vfilers configuration\n")
-        myConfigFile.write(vFilersConfig())
-
-        """
 
 
         dictTemplate = {
