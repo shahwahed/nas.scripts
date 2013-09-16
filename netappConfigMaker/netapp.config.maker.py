@@ -82,7 +82,7 @@ def ifGroupConfig():
     # then make config command using the ifGroupConfigCSS
     for ifgroups in rootTreeFiler.xpath('//ifgroups'):
         for ifgroup in ifgroups:
-            ifgroupename = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '')
+            ifgroupename = ifgroup.get('name') + "-" + "e" + re.sub('e','',ifgroup.find('port').text.replace(' ', ''))
             port = ifgroup.find('port').text
             lagType = ifgroup.find('type').text
             ifGroupConfigTxt += ifGroupConfigCSS % vars()
@@ -95,7 +95,7 @@ def vlanConfig():
     # cylcle on xml part with the ifgroupname short name (vm1 for exemple) we could find the correct port
     for ifgroups in rootTreeFiler.xpath('//ifgroups'):
         for ifgroup in ifgroups:
-            ifgroupename = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '')
+            ifgroupename = ifgroup.get('name') + "-" + "e" + re.sub('e','',ifgroup.find('port').text.replace(' ', ''))
             vlanlist = ifgroup.find('vlans').text.strip()
             vlanConfigTxt += vlanConfigCSS % vars()
     return vlanConfigTxt
@@ -123,7 +123,7 @@ def interfacesConfig():
             interfaceMtu = interface.find('mtu').text.strip()
             xpathsearchtext = '//ifgroups//ifgroup[@name="' + interfaceName + '"]'
             for ifgroup in rootTreeFiler.xpath(xpathsearchtext):
-                interfaceName = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
+                interfaceName = ifgroup.get('name') + "-" + "e" + re.sub('e','',ifgroup.find('port').text.replace(' ', '')) + "-" + interface.find('vlan').text.strip()
             interfacesConfigTxt += interfacesConfigCSS % vars()
     return interfacesConfigTxt
 
@@ -149,7 +149,7 @@ def vFilersConfig():
                     interfaceName = interface.find('int').text.strip()
                     xpathsearchtext = '//ifgroups//ifgroup[@name="' + interfaceName + '"]'
                     for ifgroup in rootTreeFiler.xpath(xpathsearchtext):
-                        interfaceName = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
+                        interfaceName = ifgroup.get('name') + "-" + "e" + re.sub('e','',ifgroup.find('port').text.replace(' ', '')) + "-" + interface.find('vlan').text.strip()
                     interfaceVlan = interface.find('vlan').text.strip()
                     interfaceIp = interface.find('ip').text.strip()
                     interfaceNetmask = interface.find('netmask').text.strip()
@@ -192,7 +192,7 @@ def vFilersInterfacesAndRoutes():
                     interfaceName = interface.find('int').text.strip()
                     xpathsearchtext = '//ifgroups//ifgroup[@name="' + interfaceName + '"]'
                     for ifgroup in rootTreeFiler.xpath(xpathsearchtext):
-                        interfaceName = ifgroup.get('name') + "-" + ifgroup.find('port').text.replace(' ', '') + "-" + interface.find('vlan').text.strip()
+                        interfaceName = ifgroup.get('name') + "-" + "e" + re.sub('e','',ifgroup.find('port').text.replace(' ', '')) + "-" + interface.find('vlan').text.strip()
                     interfaceVlan = interface.find('vlan').text.strip()
                     interfaceIp = interface.find('ip').text.strip()
                     interfaceNetmask = interface.find('netmask').text.strip()
