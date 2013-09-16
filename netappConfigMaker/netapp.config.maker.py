@@ -118,7 +118,7 @@ def interfacesConfig():
     interfacesConfigTxt = ""
     for interfaces in rootTreeFiler.xpath('//interfaces'):
         for interface in interfaces:
-            interfaceHostname = interface.get('hostnamename')
+            interfaceHostname = interface.get('hostname')
             interfaceName = interface.find('int').text.strip()
             interfaceNetmask = interface.find('netmask').text.strip()
             interfaceMtu = interface.find('mtu').text.strip()

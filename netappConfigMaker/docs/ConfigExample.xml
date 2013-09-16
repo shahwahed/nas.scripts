@@ -57,13 +57,13 @@ description of general interfaces block use for vfiler0 interfaces
 
 -->
 <interfaces>
-	<interface hostnamename="`hostname`-e0M">
+	<interface hostname="`hostname`-e0M">
 	        <int>e0M</int>
 	        <netmask>255.255.255.0</netmask>
 	        <mtu>1500</mtu>
 	</interface>
 
-	<interface hostnamename="`hostname`-3001">
+	<interface hostname="`hostname`-3001">
 	        <int>vm1</int>
 	        <vlan>3001</vlan>
 	        <netmask>255.255.255.0</netmask>
