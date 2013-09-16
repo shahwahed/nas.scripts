@@ -8,7 +8,7 @@ Script generate custom netapp filer .config and .rc based on XML config file
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
 __copyright__ = "Copyright (c) 2013 S.WAHED"
 __license__ = "GPL"
-__version__ = "1.5.2"
+__version__ = "1.5.3"
 __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
@@ -34,6 +34,7 @@ import argparse
 from lxml import etree
 import os
 from Cheetah.Template import Template
+import re
 
 # this part contain all netapp command use python 2.x % vars to fill command
 # command format :
