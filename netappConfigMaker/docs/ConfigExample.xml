@@ -44,7 +44,7 @@ description of igroup bloc
 	<ifgroup name="vm3">
 		<port>e0a</port>
 		<type>single</type>
-                <lb>none<lb>
+                <lb>none</lb>
 		<vlans>
 		1106
 		</vlans>
