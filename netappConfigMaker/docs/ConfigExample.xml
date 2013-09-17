@@ -18,6 +18,7 @@ description of igroup bloc
         <ifgroup name="vm1">  <=== name of your interface
                 <port>e3a e4b</port> <=== ports bind to interface
                 <type>lacp</type> <=== lag type
+                <lb>port</lb> <=== load balancing type  choose in : rr|mac|ip|port or none for single mode
                 <vlans> <===  vlan list
                 3210 3111 3112
                 </vlans>
@@ -27,6 +28,7 @@ description of igroup bloc
 	<ifgroup name="vm1">
 		<port>e3a e4b</port>
 		<type>lacp</type>
+                <lb>rr</lb>
 		<vlans>
 		3110 3111 3112
 		</vlans>
@@ -34,13 +36,15 @@ description of igroup bloc
 	<ifgroup name="vm2">
 		<port>e5a e4b</port>
 		<type>lacp</type>
+                <lb>mac</lb>
 		<vlans>
 		3200 3201 3102 
 		</vlans>
 	</ifgroup>
 	<ifgroup name="vm3">
-		<port>e0a e0b</port>
-		<type>lacp</type>
+		<port>e0a</port>
+		<type>single</type>
+                <lb>none<lb>
 		<vlans>
 		1106
 		</vlans>
