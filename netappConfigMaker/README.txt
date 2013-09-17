@@ -122,6 +122,7 @@ Authors and Contributors
 Author: `Shah Mohsin WAHED <mailto:shahmohsin.wahed@gmail.com>`_ | `Linkedin Profile <http://www.linkedin.com/pub/shah-mohsin-wahed/1a/750/18a>`_ | `Twitter <https://twitter.com/sm_wahed>`_
 
 Thanks to David Rousseau and Timo Sugliani for encouraging me to publish my work on github and pypi :)
+Thanks to Barnabe Gaillard for config testing
 
 Support
 =======
