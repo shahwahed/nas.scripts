@@ -35,6 +35,7 @@ from lxml import etree
 import os
 from Cheetah.Template import Template
 import re
+import datetime
 
 # this part contain all netapp command use python 2.x % vars to fill command
 # command format :
@@ -52,6 +53,7 @@ vFilerDisallowProtoCSS = "vfiler disallow %(vFilerFullName)s proto=ssh proto=rsh
 vFilerRouteAddCSS = "vfiler run %(vFilerFullName)s route add %(vFilerRouteType)s %(vFilerInterfaceRoute)s  %(vFilerRouteMetric)s\n"
 
 tmplPath = "/usr/local/bin/"
+
 
 # function to return filer hostname from xml config
 def HostNameConfig():
@@ -89,7 +91,7 @@ def ifGroupConfig():
             lagType = ifgroup.find('type').text
             lbmode = ifgroup.find('lb').text
             if lagType == "single":
-                ifGroupConfigTxt += ifGroupConfigSingleCSS % vars() 
+                ifGroupConfigTxt += ifGroupConfigSingleCSS % vars()
             else:
                 ifGroupConfigTxt += ifGroupConfigCSS % vars()
     return ifGroupConfigTxt
@@ -252,6 +254,9 @@ if __name__ == '__main__':
             print str(e)
             os._exit(1)
 
+    # date creation of file
+    runningDate = datetime.datetime.now()
+
     # we setup xml parsing env
     treeFiler = etree.parse(myXmlConfigFile)
     rootTreeFiler = treeFiler.getroot()
@@ -310,8 +315,8 @@ if __name__ == '__main__':
             'vFilersConfig': vFilersConfig(),
         }
 
-        configPrint = Template(file = tmplPath + "netapp.config.maker.Config.tmpl", searchList=[dictTemplate])
-        rcPrint = Template(file = tmplPath +"netapp.config.maker.RC.tmpl", searchList=[dictTemplate])
+        configPrint = Template(file=tmplPath + "netapp.config.maker.Config.tmpl", searchList=[dictTemplate])
+        rcPrint = Template(file=tmplPath + "netapp.config.maker.RC.tmpl", searchList=[dictTemplate])
 
         myConfigFile.write(str(configPrint))
         myRcFile.write(str(rcPrint))
