@@ -8,7 +8,7 @@ Script generate custom netapp filer .config and .rc based on XML config file
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
 __copyright__ = "Copyright (c) 2013 S.WAHED"
 __license__ = "GPL"
-__version__ = "1.5.3"
+__version__ = "1.5.4"
 __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
@@ -37,6 +37,16 @@ from Cheetah.Template import Template
 import re
 import datetime
 
+
+# Configuration variable
+#
+
+# path to template
+tmplPath = "/usr/local/bin/"
+
+# aggregate for vfiler root volume
+aggrVfilerRoot = "RP_NL2_01_etc"
+
 # this part contain all netapp command use python 2.x % vars to fill command
 # command format :
 # netapp command line with $(variable) for each variable you want to fill in
@@ -47,12 +57,10 @@ vlanConfigCSS = "vlan create %(ifgroupename)s %(vlanlist)s \n"
 ipspacesConfigCSS = "ipspace create %(ipspaceName)s %(ipspaceInterfaces)s \n"
 interfacesConfigCSS = "ifconfig %(interfaceName)s %(interfaceHostname)s netmask %(interfaceNetmask)s mtusize %(interfaceMtu)s partner %(interfaceName)s \n"
 globalRouteCSS = "route add %(routeType)s %(routeToAdd)s %(routeMetric)s \n"
-vFilerVolCreateCSS = "vol create %(vFilerShortName)s_vol_root -s volume RP_NL2_01_etc 300M \n"
+vFilerVolCreateCSS = "vol create %(vFilerShortName)s_vol_root -s volume " + aggrVfilerRoot + " 300M \n"
 vFilerCreateCSS = "vfiler create %(vFilerFullName)s -n -s %(ipspaceName)s %(vFilerIpList)s /vol/%(vFilerShortName)s_vol_root \n"
 vFilerDisallowProtoCSS = "vfiler disallow %(vFilerFullName)s proto=ssh proto=rsh proto=iscsi proto=ftp \n"
 vFilerRouteAddCSS = "vfiler run %(vFilerFullName)s route add %(vFilerRouteType)s %(vFilerInterfaceRoute)s  %(vFilerRouteMetric)s\n"
-
-tmplPath = "/usr/local/bin/"
 
 
 # function to return filer hostname from xml config
@@ -233,6 +241,44 @@ def globalRoutes():
     return routeConfigTxt
 
 
+# configure global Options
+def globalOptions():
+    globalOptionsDict = {}
+    dnsServerList = []
+    ntpServerList = ""
+
+    dnsDomainName = rootTreeFiler.xpath('//globalOptions/dnsdomainname/text()')[0].strip()
+    for dnsserver in rootTreeFiler.xpath('//globalOptions/dnsservers/dnsserver'):
+        dnsServerList.append(dnsserver.text)
+
+    for ntpserver in rootTreeFiler.xpath('//globalOptions/ntpservers/ntpserver'):
+        ntpServerList = ntpServerList + " " + ntpserver.text + ","
+    ntpServerList = ntpServerList[:-1]
+
+    mailFrom = rootTreeFiler.xpath('//globalOptions/autosupport/mailfrom/text()')[0].strip()
+    mailHost = rootTreeFiler.xpath('//globalOptions/autosupport/mailhost/text()')[0].strip()
+    partnerMail = rootTreeFiler.xpath('//globalOptions/autosupport/partnermail/text()')[0].strip()
+    mailTo = rootTreeFiler.xpath('//globalOptions/autosupport/mailto/text()')[0].strip()
+
+    snmpContact = rootTreeFiler.xpath('//globalOptions/snmp/snmpcontact/text()')[0].strip()
+    snmpLocation = rootTreeFiler.xpath('//globalOptions/snmp/snmplocation/text()')[0].strip()
+    snmpTrapHost = rootTreeFiler.xpath('//globalOptions/snmp/snmptraphost/text()')[0].strip()
+
+    globalOptionsDict = {
+        'dnsDomainName': dnsDomainName,
+        'dnsServerList': dnsServerList,
+        'ntpServerList': ntpServerList,
+        'mailFrom': mailFrom,
+        'mailHost': mailHost,
+        'partnerMail': partnerMail,
+        'mailTo': mailTo,
+        'snmpContact': snmpContact,
+        'snmpLocation': snmpLocation,
+        'snmpTrapHost': snmpTrapHost,
+    }
+
+    return globalOptionsDict
+
 # main part start here
 
 if __name__ == '__main__':
@@ -304,6 +350,7 @@ if __name__ == '__main__':
         # myConfigFile for .config
         # myRcFile for .rc
         dictTemplate = {
+            'runningDate': runningDate,
             'BasicConfig': BasicConfig(),
             'ifGroupConfig': ifGroupConfig(),
             'vlanConfig': vlanConfig(),
@@ -315,9 +362,14 @@ if __name__ == '__main__':
             'vFilersConfig': vFilersConfig(),
         }
 
+        # add to template dictionary globalOptions which is a dictionary
+        dictTemplate.update(globalOptions())
+
+        # fill template with dictionary
         configPrint = Template(file=tmplPath + "netapp.config.maker.Config.tmpl", searchList=[dictTemplate])
         rcPrint = Template(file=tmplPath + "netapp.config.maker.RC.tmpl", searchList=[dictTemplate])
 
+        # create config file
         myConfigFile.write(str(configPrint))
         myRcFile.write(str(rcPrint))
 

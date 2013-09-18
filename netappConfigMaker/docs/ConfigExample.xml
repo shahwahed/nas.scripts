@@ -13,6 +13,36 @@ put the partner IP address (HA configuration)
 <partnerAddress>
 10.10.10.10 
 </partnerAddress>
+
+<!--
+Global Options, usefull for settings vfiler0 standard parameters, dns, smtp, snmp, autosupport
+-->
+<globalOptions>
+    <dnsdomainname>mydomainname</dnsdomainname>
+    <dnsservers>
+        <dnsserver>myIpDnsSrv1</dnsserver>
+        <dnsserver>myIpDnsSrv2</dnsserver>
+        <dnsserver>myIpDnsSrv3</dnsserver>
+    </dnsservers>
+    <ntpservers>
+        <ntpserver>myIpNtpSrv1</ntpserver>
+        <ntpserver>myIpNtpSrv2</ntpserver>
+        <ntpserver>myIpNtpSrv3</ntpserver>
+    </ntpservers>
+    <snmp>
+        <snmpcontact>mySnmpContact</snmpcontact>
+        <snmplocation>mySnmpLocation</snmplocation>
+        <snmptraphost>mySnmpTrapHost</snmptraphost>
+    </snmp>
+    <autosupport>
+        <mailfrom>filerMail@myworld.com</mailfrom>
+        <mailhost>smtp.myworld.com</mailhost>
+        <partnermail>filerMailPartner@myworld.com</partnermail>
+        <mailto>myteam@myworld.com</mailto>
+    </autosupport>
+</globalOptions>
+
+
 <!--
 description of igroup bloc
         <ifgroup name="vm1">  <=== name of your interface
