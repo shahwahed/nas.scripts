@@ -28,6 +28,40 @@ $interfacesConfig
 
 $globalRoutes
 
+\# DNS configuration
+
+options dns.cache.enable on
+options dns.domainename $dnsDomainName
+options dns.enable on
+
+\# NTP configuration
+options timed.enable on
+options timed.proto ntp
+options timed.sched hourly
+options timed.servers $ntpServerList
+options timed.windows 0s
+
+\# Autosupport configuration
+options autosupport.enable on
+options autosupport.content complete
+options autosupport.from $mailFrom
+options autosupport.mailhost $mailHost
+options autosupport.minimal.subject.id hostname
+options autosupport.partner.to $partnerMail
+options autosupport.support.enable on
+options autosupport.support.to autosupport@netapp.com
+options autosupport.support.transport smtp
+options autosupport.to $mailTo
+
+\# SNMP configuration
+snmp contact '$snmpContact'
+snmp localtion '$snmpLocation'
+snmp init 1
+snmp traphost add $snmpTrapHost
+options snmp.access legacy
+options snmp.enable on
+
+
 \# vfiler Interfaces and Routes
 
 $vFilersInterfacesAndRoutes
