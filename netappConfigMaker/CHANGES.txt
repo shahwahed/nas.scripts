@@ -1,21 +1,37 @@
-Changelog for netappConfigMaker
-===============================
+Changelog
+=========
 
-Changes from version v1.5.2 to V1.5.3, 20130917
------------------------------------------------
-fixing interfaces names, now vm1-e1b2c instead vm1-e1be2c.
-fixing vfiler0 interfaces configurations
-adding <lb></lb> tag in interfaces configuration to add loadbalancing mode rr/mac/port 
+v1.5.5 - 2013-09-21
+-------------------
 
-Changes from version v1.5.2 to V1.5.0, 20130531
------------------------------------------------
-fixing path probleme of template file
+- First step in converting script to python3. Basic conversion thanks to 2to3. Can be optimize
 
+v1.5.4 - 2013-09-18
+-------------------
 
-Changes from version v1.5.0 to V1.1.0, 20130531 
------------------------------------------------
-- moving from static .config and .rc layout to cheetah template to allow modification of the layout and comment add in .rc and .config output
+- Adding generating options like : dns, smnp, autosupport, ntp. check Xml example file for more detail
+- Adding variable in python script to define aggregate for vfiler root volume
 
-V1.1.0, 20130402 -- Initial release,
+v1.5.3 - 2013-09-17
+-------------------
+
+- Fixing interfaces names, now vm1-e1b2c instead vm1-e1be2c.
+- Fixing vfiler0 interfaces configurations
+- Adding <lb></lb> tag in interfaces configuration to add loadbalancing mode rr/mac/port 
+
+v1.5.0 - 2013-05-31
+-------------------
+
+- Fixing path probleme of template file
+
+v1.1.0 - 2013-05-31 
+-------------------
+
+- Moving from static .config and .rc layout to cheetah template to allow modification of the layout and comment add in .rc and .config output
+
+v1.0.0 - 2013-04-02
+-------------------
+
+- Initial release
 
 

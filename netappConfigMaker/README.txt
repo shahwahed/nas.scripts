@@ -3,7 +3,7 @@ Netapp 7M configuration generator
 
 Tags: Netapp, Configuration, XML
 
-Version history: 1.5.2
+Version history: 1.5.4
 
 License: GPLv3
 
