@@ -8,7 +8,7 @@ Script generate custom netapp filer .config and .rc based on XML config file
 __author__ = "Shah Mohsin WAHED <s.wahed@laposte.net>"
 __copyright__ = "Copyright (c) 2013 S.WAHED"
 __license__ = "GPL"
-__version__ = "1.5.4"
+__version__ = "1.5.5"
 __cvsversion__ = "$Revision: $"
 __date__ = "$Date: $"
 
