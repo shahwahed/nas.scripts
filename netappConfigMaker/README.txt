@@ -3,7 +3,7 @@ Netapp 7M configuration generator
 
 Tags: Netapp, Configuration, XML
 
-Version history: 1.5.4
+Version history: 1.5.5
 
 License: GPLv3
 
@@ -55,7 +55,7 @@ Requirements / Pre-requisites
 
 This script require:
 
-    1. Python 2.X run on a Linux server, haven't test on windows
+    1. Python 2.X or 3.X (using netapp.config.maker.py3) run on a Linux server or workstation, haven't test on windows
     2. few python libs (lxml, argparse)
     3. of course a Netapp appliance running DataOntap in 7M (work also with Netapp simulator or Netapp Edge) to test or apply your configuration.
 
@@ -66,6 +66,7 @@ from a linux server  just run:
         #shell> netapp.config.maker.py -c configfile.xml
 
 This will generate two file <hostname>.config <hostname>.rc with hostname extract from the xml file
+Use netapp.config.maker.py3 for python3 :)
 
 Quick help
 ----------
@@ -98,6 +99,7 @@ General Options
 Ipspaces Configuration
 Interfaces Configuration
 Global Routes
+Global options (dns, autosupport, snmp)
 vFilers Configuration
 
 the layout is defined in netapp.config.maker.Config.tmpl file you can rearrange it to modify the layout
@@ -112,6 +114,7 @@ Ifgroup Configuration
 Vlan Configuration
 Interfaces Configuration
 Global Routes
+Global options (dns, autosupport, snmp)
 vFilers Configuration
 
 the layout is defined in netapp.config.maker.RC.tmpl file you can rearrange it to modify the layout

@@ -4,7 +4,7 @@ Changelog
 v1.5.5 - 2013-09-21
 -------------------
 
-- First step in converting script to python3. Basic conversion thanks to 2to3. Can be optimize
+- First step in converting script to python3. Basic conversion thanks to 2to3. Will be optimize for python3.
 
 v1.5.4 - 2013-09-18
 -------------------

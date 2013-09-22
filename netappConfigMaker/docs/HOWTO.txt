@@ -3,7 +3,7 @@ Netapp 7M configuration generator
 
 Tags: Netapp, Configuration, XML
 
-Version history: 1.5.3
+Version history: 1.5.5
 
 License: GPLv3
 
@@ -44,9 +44,9 @@ Requirements / Pre-requisites
 
 This script require:
 
-    1. Python 2.X run on a Linux server, haven't test on windows
-    2. few python libs (lxml, argparse)
-    3. of course a Netapp appliance running DataOntap in 7M (work also with Netapp simulator or Netapp Edge) to test or apply your configuration.
+    1. Python 2.X or 3.X (using netapp.config.maker.py3) run on a Linux server or workstation, haven't test on windows
+    2. few python libs (lxml, argparse, cheetah)
+    3. of course a Netapp appliance running DataOntap in 7Mode (work also with Netapp simulator or Netapp Edge) to test or apply your configuration.
 
 usage
 =====
@@ -55,6 +55,7 @@ from a linux server  just run:
         #shell> netapp.config.maker.py -c configfile.xml
 
 This will generate two file <hostname>.config <hostname>.rc with hostname extract from the xml file
+Use netapp.config.maker.py3 for python3 :)
 
 Quick help
 ----------
@@ -87,10 +88,11 @@ General Options
 Ipspaces Configuration
 Interfaces Configuration
 Global Routes
+General Options (like dns, snmp, autosupport)
 vFilers Configuration
 
 the layout of the .config is defined into a cheetah template file netapp.config.maker.Config.tmpl
-in this template you can add comment or custom fixed setting (autosupport for exmemple), the part adding by the script are $<scriptFunctionName> and have to be add to the dict if not already in it.
+in this template you can add comment or custom fixed setting , the part adding by the script are $<scriptFunctionName> and have to be add to the dict if not already in it.
 
 .rc layout
 ----------
@@ -102,6 +104,7 @@ Ifgroup Configuration
 Vlan Configuration
 Interfaces Configuration
 Global Routes
+General Options (like dns, snmp, autosupport)
 vFilers Configuration
 
 the layout of the .rc is defined into a cheetah template file netapp.config.maker.RC.tmpl
